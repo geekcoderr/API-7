@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/geekcoderr/API-7.git'
+                git url: 'https://github.com/geekcoderr/API-7.git', branch: 'main'
             }
         }
 
