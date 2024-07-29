@@ -15,7 +15,7 @@ pipeline {
                         sh "rm -rf ${WORKDIR}"
                     }
                     echo "Cloning repository ${GIT_REPO}"
-                    sh "git clone -b ${BRANCH} ${GIT_REPO} ${WORKDIR}"
+                    sh "git clone -b ${BRANCH} ${GIT_REPO} ${WORKDIR}/"
                 }
             }
         }
