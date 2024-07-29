@@ -10,7 +10,8 @@ pipeline {
         stage('Cloning the Repository') {
             steps {
                 script {
-                    if (fileExists(WORKDIR)) {
+                    if (fileExists(WORKDIR)) 
+                    {
                         echo "Removing existing directory ${WORKDIR}"
                         sh "rm -rf ${WORKDIR}"
                     }
