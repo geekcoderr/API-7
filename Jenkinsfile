@@ -1,21 +1,22 @@
-pipeline{
+pipeline {
     agent any
 
-    environment{
+    environment {
         GIT_REPO = 'https://github.com/geekcoderr/API-7.git'
         BRANCH = 'main'
         WORKDIR = '/var/jenkins_home/workspace/WORK_REPO'
     }
-
-    stage('Cloning the Repository'){
-        steps{
-            script{
-                if (fileExists(CLONE_DIR)) {
+    stages {
+        stage('Cloning the Repository') {
+            steps {
+                script {
+                    if (fileExists(WORKDIR)) {
                         echo "Removing existing directory ${WORKDIR}"
                         sh "rm -rf ${WORKDIR}"
+                    }
+                    echo "Cloning repository ${GIT_REPO}"
+                    sh "git clone -b ${BRANCH} ${GIT_REPO} ${WORKDIR}"
                 }
-                echo "Cloning repository ${GIT_REPO}"
-                sh "git clone -b ${BRANCH} ${GIT_REPO} ${WORKDIR}"
             }
         }
     }
