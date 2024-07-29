@@ -4,7 +4,7 @@ pipeline {
     environment {
         GIT_REPO = 'https://github.com/geekcoderr/API-7.git'
         BRANCH = 'main'
-        WORKDIR = '/var/jenkins_home/workspace/WORK_REPO'
+        WORKDIR = 'WORK_REPO'
     }
     stages {
         stage('Cloning the Repository') {
@@ -15,7 +15,7 @@ pipeline {
                         sh "rm -rf ${WORKDIR}"
                     }
                     echo "Cloning repository ${GIT_REPO}"
-                    sh "git clone -b ${BRANCH} ${GIT_REPO} ${WORKDIR}/"
+                    sh "git clone -b ${BRANCH} ${GIT_REPO} ${WORKDIR}"
                 }
             }
         }
