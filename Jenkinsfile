@@ -11,9 +11,11 @@ pipeline {
         stage('Setup Workspace') {
             steps {
                 script {
+                    // Check if WORKDIR exists
                     if (fileExists(WORKDIR)) {
                         echo "Directory ${WORKDIR} already exists."
                         dir(WORKDIR) {
+                            // Check if it's a valid git repository
                             if (fileExists('.git')) {
                                 echo "Pulling latest changes from ${GIT_REPO} branch ${BRANCH}."
                                 sh "git checkout ${BRANCH}"
@@ -21,12 +23,15 @@ pipeline {
                             } else {
                                 echo "The directory exists but is not a git repository. Re-cloning."
                                 deleteDir()
-                                sh "git clone -b ${BRANCH} ${GIT_REPO} ${WORKDIR}"
+                                sh "git clone -b ${BRANCH} ${GIT_REPO} ."
                             }
                         }
                     } else {
                         echo "Creating directory ${WORKDIR} and cloning repository ${GIT_REPO}."
-                        sh "git clone -b ${BRANCH} ${GIT_REPO} ${WORKDIR}"
+                        sh "mkdir ${WORKDIR}"
+                        dir(WORKDIR) {
+                            sh "git clone -b ${BRANCH} ${GIT_REPO} ."
+                        }
                     }
                 }
             }
