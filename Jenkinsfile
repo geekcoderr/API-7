@@ -11,6 +11,7 @@ pipeline {
         stage('Setup Workspace') {
             steps {
                 script {
+                    sh "cd .."
                     if (fileExists(WORK_DIR)) {
                         echo "Directory ${WORKDIR} already exists."
                         dir(WORK_DIR) {
@@ -27,9 +28,9 @@ pipeline {
                     } else {
                         echo "Creating directory ${WORK_DIR} and cloning repository ${GIT_REPO}."
                         sh "mkdir ${WORK_DIR}"
-                        dir(WORK_DIR) {
-                            sh "git clone -b ${BRANCH} ${GIT_REPO} ."
-                        }
+                        sh "cd ${WORK_DIR}"
+                        sh "git clone -b ${BRANCH} ${GIT_REPO} ."
+                        
                     }
                 }
             }
