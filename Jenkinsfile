@@ -4,18 +4,16 @@ pipeline {
     environment {
         GIT_REPO = 'https://github.com/geekcoderr/API-7.git'
         BRANCH = 'main'
-        WORKDIR = 'WORK_REPO'
+        WORK_DIR = 'WORK_REPO'
     }
 
     stages {
         stage('Setup Workspace') {
             steps {
                 script {
-                    // Check if WORKDIR exists
-                    if (fileExists(WORKDIR)) {
+                    if (fileExists(WORK_DIR)) {
                         echo "Directory ${WORKDIR} already exists."
-                        dir(WORKDIR) {
-                            // Check if it's a valid git repository
+                        dir(WORK_DIR) {
                             if (fileExists('.git')) {
                                 echo "Pulling latest changes from ${GIT_REPO} branch ${BRANCH}."
                                 sh "git checkout ${BRANCH}"
@@ -27,9 +25,9 @@ pipeline {
                             }
                         }
                     } else {
-                        echo "Creating directory ${WORKDIR} and cloning repository ${GIT_REPO}."
-                        sh "mkdir ${WORKDIR}"
-                        dir(WORKDIR) {
+                        echo "Creating directory ${WORK_DIR} and cloning repository ${GIT_REPO}."
+                        sh "mkdir ${WORK_DIR}"
+                        dir(WORK_DIR) {
                             sh "git clone -b ${BRANCH} ${GIT_REPO} ."
                         }
                     }
