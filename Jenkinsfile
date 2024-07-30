@@ -14,17 +14,16 @@ pipeline {
                     sh "cd .."
                     if (fileExists(WORK_DIR)) {
                         echo "Directory ${WORKDIR} already exists."
-                        dir(WORK_DIR) {
+                        sh "cd ${WORK_DIR}"
                             if (fileExists('.git')) {
                                 echo "Pulling latest changes from ${GIT_REPO} branch ${BRANCH}."
                                 sh "git checkout ${BRANCH}"
                                 sh "git pull origin ${BRANCH}"
                             } else {
                                 echo "The directory exists but is not a git repository. Re-cloning."
-                                deleteDir()
+                                sh "cd .. ; rm * -r"
                                 sh "git clone -b ${BRANCH} ${GIT_REPO} ."
                             }
-                        }
                     } else {
                         echo "Creating directory ${WORK_DIR} and cloning repository ${GIT_REPO}."
                         sh "mkdir ${WORK_DIR}"
