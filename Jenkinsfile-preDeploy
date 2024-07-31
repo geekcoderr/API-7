@@ -1,25 +1,17 @@
-pipeline {
-    agent any
-    environment {
-        // Using returnStdout
-        CC = """${sh(
-                returnStdout: true,
-                script: 'echo "clang"'
-            )}"""
-        // Using returnStatus
-        EXIT_STATUS = """${sh(
-                returnStatus: true,
-                script: 'exit 1'
-            )}"""
-    }
-    stages {
-        stage('Example') {
-            environment {
-                DEBUG_FLAGS = '-g'
-            }
-            steps {
-                sh 'printenv'
-            }
+node {
+    stage('SCM UPDATE') {
+        if (!fileExists('.git')) {
+            echo 'GIT REPO DOSENT EXIST'
+            sh 'git clone -b main https://github.com/geekcoderr/API-7 .'
         }
+    else {
+            echo 'GIT REPO ALREADY EXIST'
+            checkout scm
+    }
+    }
+    stage('Print Environment Variables') {
+       whitCredentials([usernamePassword(credentialsId: 'example-credentials-id'),usernamevariable: 'uname',passwordVariable: 'pass']){
+            sh 'curl -u $uname:$pass https://hub.docker.com/'
+       }
     }
 }
