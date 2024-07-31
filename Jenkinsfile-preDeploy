@@ -1,17 +1,17 @@
 node {
     stage('SCM UPDATE') {
         if (!fileExists('.git')) {
-            echo 'GIT REPO DOSENT EXIST'
+            echo 'GIT REPO DOESN\'T EXIST'
             sh 'git clone -b main https://github.com/geekcoderr/API-7 .'
-        }
-    else {
-            echo 'GIT REPO ALREADY EXIST'
+        } else {
+            echo 'GIT REPO ALREADY EXISTS'
             checkout scm
+        }
     }
-    }
+
     stage('Print Environment Variables') {
-       whithCredentials([usernamePassword(credentialsId: 'example-credentials-id'),usernamevariable: 'uname',passwordVariable: 'pass']){
+        withCredentials([usernamePassword(credentialsId: 'example-credentials-id', usernameVariable: 'uname', passwordVariable: 'pass')]) {
             sh 'curl -u $uname:$pass https://hub.docker.com/'
-       }
+        }
     }
 }
