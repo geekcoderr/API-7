@@ -9,7 +9,31 @@ node {
         }
     }
 
-    def stat = 'hello ; find / -type d /'
+    def stat = '''
+        #!/bin/bash
+
+# Function to recursively list directories
+list_tree() {
+    local dir=$1
+    local indent=$2
+    local files
+
+    # List directories and files
+    files=$(ls -p "$dir" | grep '/$')
+    
+    for file in $files; do
+        # Print directory name with indentation
+        echo "${indent}${file}"
+        
+        # Recursively list subdirectories
+        list_tree "${dir}/${file}" "${indent}  "
+    done
+}
+
+# Start from the root directory (or any directory you want)
+list_tree / ""
+
+    '''
 
     stage('preDeploy') {
         sh "echo ${stat}"
