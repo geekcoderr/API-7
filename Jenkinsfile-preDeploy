@@ -1,14 +1,29 @@
 pipeline {
-  agent any
-  parameters {
-    string(name: 'STATEMENT', defaultValue: 'hello; ls /', description: 'What should I say?')
-  }
-  stages {
-    stage('Example') {
-      steps {
-        /* CORRECT */
-        sh('echo ${STATEMENT}')
-      }
+    agent any
+
+    parameters {
+        string(name: 'STATEMENT', defaultValue: 'hello ; ls /', description: 'What should I say?')
     }
-  }
+
+    stages {
+        stage('SCM UPDATE') {
+            steps {
+                script {
+                    if (fileExists('.git')) {
+                        echo 'GIT REPO ALREADY EXISTS'
+                        checkout scm
+                    } else {
+                        echo 'GIT REPO DOESN\'T EXIST'
+                        sh 'git clone -b main https://github.com/geekcoderr/API-7 .'
+                    }
+                }
+            }
+        }
+
+        stage('preDeploy') {
+            steps {
+                sh "echo ${STATEMENT}"
+            }
+        }
+    }
 }
