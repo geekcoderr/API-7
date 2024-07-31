@@ -9,8 +9,9 @@ node {
             checkout scm
     }
     }
-
-       whitCredentials([usernamePassword(credentialsId: 'example-credentials-id'),usernamevariable: 'uname',passwordVariable: 'pass']){
+    stage('Print Environment Variables') {
+       whithCredentials([usernamePassword(credentialsId: 'example-credentials-id'),usernamevariable: 'uname',passwordVariable: 'pass']){
             sh 'curl -u $uname:$pass https://hub.docker.com/'
        }
+    }
 }
