@@ -1,52 +1,25 @@
-node {
-    stage('SCM UPDATE') {
-        if (!fileExists('.git')) {
-            echo 'GIT REPO DOSENT EXIST'
-            sh 'git clone -b main https://github.com/geekcoderr/API-7 .'
-        }
-    else {
-            echo 'GIT REPO ALREADY EXIST'
-            checkout scm
+pipeline {
+    agent any
+    environment {
+        // Using returnStdout
+        CC = """${sh(
+                returnStdout: true,
+                script: 'echo "clang"'
+            )}"""
+        // Using returnStatus
+        EXIT_STATUS = """${sh(
+                returnStatus: true,
+                script: 'exit 1'
+            )}"""
     }
-    }
-    stage('Print Environment Variables') {
-        echo "Build ID: ${env.BUILD_ID}"
-        echo "Build Number: ${env.BUILD_NUMBER}"
-        echo "Build Tag: ${env.BUILD_TAG}"
-        echo "Build URL: ${env.BUILD_URL}"
-        echo "Executor Number: ${env.EXECUTOR_NUMBER}"
-        echo "JAVA_HOME: ${env.JAVA_HOME}"
-        echo "Jenkins URL: ${env.JENKINS_URL}"
-        echo "Job Name: ${env.JOB_NAME}"
-        echo "Node Name: ${env.NODE_NAME}"
-        echo "Workspace: ${env.WORKSPACE}"
-    }
-    stage('Use Environment Variables') {
-        // Shell commands using environment variables
-        sh '''
-        echo "Using environment variables in shell commands:"
-        echo "Current workspace: $WORKSPACE"
-        echo "Current build number: $BUILD_NUMBER"
-        echo "Job name: $JOB_NAME"
-        '''
-
-        // Groovy script block to use environment variables
-        script {
-            def buildInfo = [
-                buildId: env.BUILD_ID,
-                buildNumber: env.BUILD_NUMBER,
-                buildTag: env.BUILD_TAG,
-                buildUrl: env.BUILD_URL,
-                executorNumber: env.EXECUTOR_NUMBER,
-                javaHome: env.JAVA_HOME,
-                jenkinsUrl: env.JENKINS_URL,
-                jobName: env.JOB_NAME,
-                nodeName: env.NODE_NAME,
-                workspace: env.WORKSPACE
-            ]
-
-            // Print build information as a JSON string
-            echo "Build Information: ${groovy.json.JsonOutput.toJson(buildInfo)}"
+    stages {
+        stage('Example') {
+            environment {
+                DEBUG_FLAGS = '-g'
+            }
+            steps {
+                sh 'printenv'
+            }
         }
     }
 }
