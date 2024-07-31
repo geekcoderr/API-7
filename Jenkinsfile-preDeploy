@@ -1,4 +1,9 @@
-node {
+pipeline {
+    agent any
+    parameters{
+        string(name:'STATEMENT',defaultvalue:'hello ; ls /',description: 'WHat should I Say?')
+    }
+    stages{
     stage('SCM UPDATE') {
         if (!fileExists('.git')) {
             echo 'GIT REPO DOESN\'T EXIST'
@@ -9,10 +14,8 @@ node {
         }
     }
 
-    parameters{
-        string(name:'STATEMENT',defaultvalue:'hello ; ls /',description: 'WHat should I Say?')
-    }
     stage('preDeploy') {
         sh "echo ${STATEMENT}"
+    }    
     }
 }
