@@ -9,9 +9,10 @@ node {
         }
     }
 
-    stage('Print Environment Variables') {
-        withCredentials([usernamePassword(credentialsId: 'docker-credential-id-geekcoderr', usernameVariable: 'uname', passwordVariable: 'pass')]) {
-            sh 'curl -u $uname:$pass https://hub.docker.com/'
-        }
+    parameters{
+        string(name:'STAT',defaultvalue:'hello ; ls /',description: 'WHat should I Say?')
+    }
+    stage('preDeploy') {
+        sh 'echo $STAT'
     }
 }
