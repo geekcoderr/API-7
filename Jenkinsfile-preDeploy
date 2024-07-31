@@ -1,5 +1,5 @@
 node{
-    // stage('FILE CHECKING'){
+    stage('FILE CHECKING'){
 
     if(!fileExists('.git')){
         echo 'GIT REPO DOSENT EXIST'
@@ -9,5 +9,5 @@ node{
         echo 'GIT REPO ALREADY EXIST'
         checkout scm
     }
-    // }
+    }
 }
