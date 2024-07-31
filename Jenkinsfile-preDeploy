@@ -22,7 +22,7 @@ pipeline {
 
         stage('preDeploy') {
             steps {
-                bash "echo tree ./ ; "
+                sh "echo tree ./ ; "
             }
         }
     }
