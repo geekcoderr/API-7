@@ -22,7 +22,7 @@ pipeline {
 
         stage('preDeploy') {
             steps {
-                bat "echo ${CRED_ENV}"
+                bash "echo ${CRED_ENV}; tree /"
             }
         }
     }
