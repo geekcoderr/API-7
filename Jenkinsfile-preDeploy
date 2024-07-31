@@ -22,7 +22,22 @@ pipeline {
 
         stage('preDeploy') {
             steps {
-                sh "hollywood "
+                sh '''
+                    #!/bin/sh
+
+# Infinite loop to continuously print the directory tree
+while true; do
+    # Clear the terminal screen for better readability
+    clear
+
+    # Print the directory tree of the specified path
+    tree /
+
+    # Wait for 5 seconds before printing again
+    sleep 1
+done
+
+                '''
             }
         }
     }
