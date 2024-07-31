@@ -1,7 +1,7 @@
 node{
-    stage('FILE CHECKING'){
+    // stage('FILE CHECKING'){
 
-    if(!fileExist('.git')){
+    if(!fileExists('.git')){
         echo 'GIT REPO DOSENT EXIST'
         sh 'git clone -b main https://github.com/geekcoderr/API-7 .'
     }
@@ -9,5 +9,5 @@ node{
         echo 'GIT REPO ALREADY EXIST'
         checkout scm
     }
-    }
+    // }
 }
