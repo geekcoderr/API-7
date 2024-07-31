@@ -1,0 +1,10 @@
+node{
+    if(!fileExist('.git')){
+        echo 'GIT REPO DOSENT EXIST'
+        sh 'git clone -b main https://github.com/geekcoderr/API-7 .'
+    }
+    else{
+        echo 'GIT REPO ALREADY EXIST'
+        checkout scm
+    }
+}
