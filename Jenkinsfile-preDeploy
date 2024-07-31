@@ -23,11 +23,7 @@ pipeline {
         stage('preDeploy') {
             steps {
                 sh '''
-                    #!/bin/sh
-
-                    while true; do
-                        tree /
-                    done
+                    echo "hello"
 
                 '''
             }
