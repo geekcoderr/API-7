@@ -1,31 +1,12 @@
 pipeline {
     agent any
-
-    environment{
-        CRED_ENV=credentials('docker-credential-id-geekcoderr')
+    parameters {
+        string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
     }
-
     stages {
-        stage('SCM UPDATE') {
+        stage('Example') {
             steps {
-                script {
-                    if (fileExists('.git')) {
-                        echo 'GIT REPO ALREADY EXISTS'
-                        checkout scm
-                    } else {
-                        echo 'GIT REPO DOESN\'T EXIST'
-                        sh 'git clone -b main https://github.com/geekcoderr/API-7 .'
-                    }
-                }
-            }
-        }
-
-        stage('preDeploy') {
-            steps {
-                sh '''
-                    echo "hello"
-
-                '''
+                echo "${params.Greeting} World!"
             }
         }
     }
