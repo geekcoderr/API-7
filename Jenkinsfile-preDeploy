@@ -10,7 +10,7 @@ node {
     }
 
     stage('Print Environment Variables') {
-        withCredentials([usernamePassword(credentialsId: 'example-credentials-id', usernameVariable: 'uname', passwordVariable: 'pass')]) {
+        withCredentials([usernamePassword(credentialsId: 'docker-credential-id-geekcoderr', usernameVariable: 'uname', passwordVariable: 'pass')]) {
             sh 'curl -u $uname:$pass https://hub.docker.com/'
         }
     }
