@@ -13,6 +13,6 @@ node {
         string(name:'STAT',defaultvalue:'hello ; ls /',description: 'WHat should I Say?')
     }
     stage('preDeploy') {
-        sh 'echo $STAT'
+        sh 'echo ${STAT}'
     }
 }
