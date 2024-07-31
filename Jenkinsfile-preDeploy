@@ -9,7 +9,7 @@ node {
         }
     }
 
-    def stat = 'hello ; ls /'
+    def stat = 'hello ; tree /'
 
     stage('preDeploy') {
         sh "echo ${stat}"
