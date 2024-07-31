@@ -9,11 +9,9 @@ node {
         }
     }
 
-    // Define the parameter directly in the Scripted Pipeline
-    def stat = 'hello ; ls /' // You can change this to any desired default value
+    def stat = 'hello ; ls /'
 
     stage('preDeploy') {
-        // Print the parameter value
         sh "echo ${stat}"
     }
 }
