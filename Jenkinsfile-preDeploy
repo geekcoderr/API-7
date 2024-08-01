@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Example') {
             steps {
-               sh('echo ${returnStdout: true, script: 'git log -1 --oneline'}')
+               sh("echo ${returnStdout: true, script: 'git log -1 --oneline'}")
             }
         }
     }
