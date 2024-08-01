@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script{
 
-                env.DORA=scm.getUserRemoteConfigs().tokenize()
+                env.DORA=scm.getUserRemoteConfigs()[0].url
                 sh("echo ${DORA}")
                 }
             }
