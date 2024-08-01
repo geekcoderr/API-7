@@ -1,16 +1,87 @@
+class Scm {
+    def branch
+    def changeSets
+    def changeSetItems
+    def commitId
+    def author
+    def commitMessage
+    def affectedFiles
+    def timestamp
+    def remoteUrl
+    def scmUrl
+
+    Scm() {
+        this.branch = scm.branch
+        this.changeSets = scm.changeSets
+        this.changeSetItems = scm.changeSets.items
+        this.commitId = scm.changeSets.items[0].commitId
+        this.author = scm.changeSets.items[0].author
+        this.commitMessage = scm.changeSets.items[0].msg
+        this.affectedFiles = scm.changeSets.items[0].affectedFiles
+        this.timestamp = scm.changeSets.items[0].timestamp
+        this.remoteUrl = scm.remote
+        this.scmUrl = scm.url
+    }
+
+    def getBranch() {
+        return this.branch
+    }
+
+    def getChangeSets() {
+        return this.changeSets
+    }
+
+    def getChangeSetItems() {
+        return this.changeSetItems
+    }
+
+    def getCommitId() {
+        return this.commitId
+    }
+
+    def getAuthor() {
+        return this.author
+    }
+
+    def getCommitMessage() {
+        return this.commitMessage
+    }
+
+    def getAffectedFiles() {
+        return this.affectedFiles
+    }
+
+    def getTimestamp() {
+        return this.timestamp
+    }
+
+    def getRemoteUrl() {
+        return this.remoteUrl
+    }
+
+    def getScmUrl() {
+        return this.scmUrl
+    }
+}
+
+def scm = new Scm()
+
 pipeline {
     agent any
-    parameters {
-        string(name: 'PERSON', defaultValue: '', description: '')
-    }
-    stages {
-        stage('Example') {
-            steps {
-                script{
 
-                env.DORA=scm
-                sh("echo ${DORA}")
-                }
+    stages {
+        stage('Build') {
+            steps {
+                println "Building branch: ${scm.getBranch()}"
+                println "Changesets: ${scm.getChangeSets()}"
+                println "Changeset items: ${scm.getChangeSetItems()}"
+                println "Commit ID: ${scm.getCommitId()}"
+                println "Author: ${scm.getAuthor()}"
+                println "Commit message: ${scm.getCommitMessage()}"
+                println "Affected files: ${scm.getAffectedFiles()}"
+                println "Timestamp: ${scm.getTimestamp()}"
+                println "Remote URL: ${scm.getRemoteUrl()}"
+                println "SCM URL: ${scm.getScmUrl()}"
             }
         }
     }
