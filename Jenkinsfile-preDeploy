@@ -72,16 +72,16 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                println "Building branch: ${scm.getBranch()}"
-                println "Changesets: ${scm.getChangeSets()}"
-                println "Changeset items: ${scm.getChangeSetItems()}"
-                println "Commit ID: ${scm.getCommitId()}"
-                println "Author: ${scm.getAuthor()}"
-                println "Commit message: ${scm.getCommitMessage()}"
-                println "Affected files: ${scm.getAffectedFiles()}"
-                println "Timestamp: ${scm.getTimestamp()}"
-                println "Remote URL: ${scm.getRemoteUrl()}"
-                println "SCM URL: ${scm.getScmUrl()}"
+                sh "Building branch: ${scm.getBranch()}"
+                sh "Changesets: ${scm.getChangeSets()}"
+                sh "Changeset items: ${scm.getChangeSetItems()}"
+                sh "Commit ID: ${scm.getCommitId()}"
+                sh "Author: ${scm.getAuthor()}"
+                sh "Commit message: ${scm.getCommitMessage()}"
+                sh "Affected files: ${scm.getAffectedFiles()}"
+                sh "Timestamp: ${scm.getTimestamp()}"
+                sh "Remote URL: ${scm.getRemoteUrl()}"
+                sh "SCM URL: ${scm.getScmUrl()}"
             }
         }
     }
