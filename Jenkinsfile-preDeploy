@@ -1,12 +1,106 @@
 pipeline {
     agent any
-    stages {
-        stage('Example') {
-            steps {
-                script{
 
-                env.DORA=scm.branch
-                sh("echo ${DORA}")
+    parameters {
+        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // Example usage of checkout
+                    checkout scm
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    // Example usage of various methods and properties
+
+                    // buildEnvironment
+                    def buildEnv = [:]
+                    scm.buildEnvironment(currentBuild, buildEnv)
+                    echo "Build Environment: ${buildEnv}"
+
+                    // buildEnvVars
+                    def envVars = [:]
+                    scm.buildEnvVars(currentBuild, envVars)
+                    echo "Environment Variables: ${envVars}"
+
+                    // calcRevisionsFromBuild
+                    def scmRevState = scm.calcRevisionsFromBuild(currentBuild, pwd(), new hudson.Launcher.LocalLauncher(TaskListener.NULL), TaskListener.NULL)
+                    echo "SCM Revision State: ${scmRevState}"
+
+                    // compareRemoteRevisionWith
+                    def pollResult = scm.compareRemoteRevisionWith(currentBuild.project, new hudson.Launcher.LocalLauncher(TaskListener.NULL), pwd(), TaskListener.NULL, scmRevState)
+                    echo "Polling Result: ${pollResult}"
+
+                    // createChangeLogParser
+                    def changeLogParser = scm.createChangeLogParser()
+                    echo "Change Log Parser: ${changeLogParser}"
+
+                    // createClient
+                    def gitClient = scm.createClient(TaskListener.NULL, envVars, currentBuild, pwd())
+                    echo "Git Client: ${gitClient}"
+
+                    // createRepoList
+                    def repoList = scm.createRepoList('https://github.com/your-repo.git', 'your-credentials-id')
+                    echo "Repository List: ${repoList}"
+
+                    // getBranches
+                    def branches = scm.getBranches()
+                    echo "Branches: ${branches}"
+
+                    // getBrowser
+                    def browser = scm.getBrowser()
+                    echo "Repository Browser: ${browser}"
+
+                    // getBuildChooser
+                    def buildChooser = scm.getBuildChooser()
+                    echo "Build Chooser: ${buildChooser}"
+
+                    // getBuildData
+                    def buildData = scm.getBuildData(currentBuild)
+                    echo "Build Data: ${buildData}"
+
+                    // getGitExe
+                    def gitExe = scm.getGitExe(currentBuild.builtOn, envVars, TaskListener.NULL)
+                    echo "Git Executable: ${gitExe}"
+
+                    // getGitTool
+                    def gitTool = scm.getGitTool()
+                    echo "Git Tool: ${gitTool}"
+
+                    // getParameterString
+                    def paramString = scm.getParameterString('original-string', envVars)
+                    echo "Parameter String: ${paramString}"
+
+                    // getParamExpandedRepo
+                    def paramExpandedRepo = scm.getParamExpandedRepo(envVars, repoList[0])
+                    echo "Parameter Expanded Repo: ${paramExpandedRepo}"
+
+                    // getRepositories
+                    def repositories = scm.getRepositories()
+                    echo "Repositories: ${repositories}"
+
+                    // getSubmoduleCfg
+                    def submoduleCfg = scm.getSubmoduleCfg()
+                    echo "Submodule Configuration: ${submoduleCfg}"
+
+                    // getUserRemoteConfigs
+                    def userRemoteConfigs = scm.getUserRemoteConfigs()
+                    echo "User Remote Configs: ${userRemoteConfigs}"
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    // Use other SCM methods as needed in this stage
                 }
             }
         }
