@@ -6,7 +6,7 @@ pipeline {
                 script{
                     // env.DORA = env.GIT_COMMIT[0..7]
                     // env.DORA = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
-                    env.DORA = scm.getBranches()
+                    env.DORA = scm.configureXtream()
                     sh("echo ${DORA}")
                 }
             }
