@@ -5,6 +5,7 @@ pipeline {
             steps {
                 script{
                     env.DORA = env.GIT_COMMIT[0..7]
+                    env.DORA = env.GIT_TOKEN
                     sh("echo ${DORA}")
                 }
             }
