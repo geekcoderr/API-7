@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script{
 
-               sh("echo ${returnStdout: true, script: 'git log -1 --oneline'}")
+               sh(returnStdout: true, script: 'git log -1 --oneline')
                 }
             }
         }
