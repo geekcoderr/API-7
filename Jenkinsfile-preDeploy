@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script{
 
-                env.DORA=sh(returnStdout: true, script: 'git log -1 --oneline').trim().tokenize()
+                env.DORA=sh(returnStdout: true, script: 'git log -1 --oneline').trim().tokenize()[0]
                 sh("echo ${DORA}")
                 }
             }
