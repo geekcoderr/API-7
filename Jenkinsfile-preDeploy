@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script{
 
-                env.DORA=scm.getUserRemoteConfigs()[0].url
+                env.DORA=scm.getUserRemoteConfigs()[0].getCommitID()
                 sh("echo ${DORA}")
                 }
             }
