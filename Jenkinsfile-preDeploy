@@ -97,12 +97,5 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                script {
-                    // Use other SCM methods as needed in this stage
-                }
-            }
-        }
     }
 }
