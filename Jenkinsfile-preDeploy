@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script{
 
-                env.DORA=scm.generateCodeBuildCommandList()
+                env.DORA=scm.getUserRemoteConfigs()
                 sh("echo ${DORA}")
                 }
             }
