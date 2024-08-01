@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script{
 
-                env.DORA=scm.getBuildChooser()
+                env.DORA=scm.generateCodeBuildCommandList()
                 sh("echo ${DORA}")
                 }
             }
