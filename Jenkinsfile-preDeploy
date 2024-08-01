@@ -1,6 +1,6 @@
-node{
-  stage('predeploy'){
-    sh('echo ${params.DORADENTIAL}')
-    sh('echo ${DORADENTIAL}')
-  }
+node {
+    stage('predeploy') {
+        sh('echo ${params.DORA}')
+        // sh('echo ${DORADENTIAL}')
+    }
 }
