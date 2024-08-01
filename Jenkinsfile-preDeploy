@@ -1,12 +1,15 @@
 pipeline {
     agent any
+    environment{
+        GITD=env.
+    }
     parameters {
         string(name: 'PERSON', defaultValue: '', description: '')
     }
     stages {
         stage('Example') {
             steps {
-               sh('echo ${env.GIT_COMMIT}')
+               sh('echo ${returnStdout: true, script: 'git log -1 --oneline'}')
             }
         }
     }
