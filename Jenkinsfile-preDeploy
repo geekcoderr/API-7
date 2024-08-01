@@ -4,9 +4,8 @@ pipeline {
         stage('Example') {
             steps {
                 script{
-
-                env.DORA=scm.getUserRemoteConfigs()[0].getCommitID()
-                sh("echo ${DORA}")
+                    env.DORA = env.GIT_COMMIT
+                    sh("echo ${DORA}")
                 }
             }
         }
