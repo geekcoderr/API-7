@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment{
-        GITD=env.
-    }
     parameters {
         string(name: 'PERSON', defaultValue: '', description: '')
     }
