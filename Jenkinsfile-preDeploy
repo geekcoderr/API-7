@@ -1,10 +1,10 @@
 node {
     checkout scm
 
-    def dockerImage = docker.image("python:latest")
+    def dockerImage = docker.image("")
 
     dockerImage.inside {
-        sh 'python --version'
+        sh 'ls /usr/share/nginx/html/'
     }
 }
 
