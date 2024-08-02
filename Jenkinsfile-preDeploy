@@ -9,7 +9,12 @@ pipeline {
                 sh 'node --version'
             }
         }
-        
+        stage('deploy') {
+            agent any
+            steps {
+                sh 'node --version'
+            }
+        }
     }
 }
 
