@@ -4,7 +4,7 @@ node {
     def dockerImage = docker.image("python:latest")
 
     dockerImage.inside {
-        sh 'echo "hello"'
+        sh 'python --version'
     }
 }
 
