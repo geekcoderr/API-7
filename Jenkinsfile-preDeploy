@@ -1,7 +1,7 @@
 node {
     checkout scm
 
-    def dockerImage = docker.image("doraemon:latest")
+    def dockerImage = docker.image("python:latest")
 
     dockerImage.inside {
         sh 'ls /usr/share/nginx/html/'
