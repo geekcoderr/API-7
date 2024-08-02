@@ -1,12 +1,14 @@
-node{
+node {
     checkout scm
 
-    def dockerImage=docker.build("python:latest")
+    def dockerImage = docker.image("python:latest")
 
-    dockerImage.inside{
-        sh('print("hello")')
+    dockerImage.inside {
+        sh 'echo "hello"'
     }
 }
+
+
 // pipeline {
 //     agent any
 //     stages {
