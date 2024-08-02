@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    // agent none
     stages {
         stage('Test') {
              agent {
@@ -9,12 +9,7 @@ pipeline {
                 sh 'node --version'
             }
         }
-        stage('deploy') {
-            agent any
-            steps {
-                sh 'node --version'
-            }
-        }
+        
     }
 }
 
