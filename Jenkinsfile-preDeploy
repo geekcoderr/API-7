@@ -1,4 +1,5 @@
 pipeline {
+    agent any
     stages {
         stage('Test') {
             agent {
@@ -9,7 +10,9 @@ pipeline {
             }
         }
         stage('deploy') {
-            agent any
+            agent {
+                any
+            }
             steps {
                 sh 'node --version'
             }
