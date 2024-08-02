@@ -1,25 +1,12 @@
-pipeline {
-    agent none
-    stages {
-        stage('Test') {
-             agent {
-        docker { image 'node:20.16.0-alpine3.20' 
-        reuseNode true
-        }
-    }
-            steps {
-                sh 'node --version'
-            }
-        }
-        stage('deploy') {
-            agent any
-            steps {
-                sh 'node --version'
-            }
-        }
+node{
+    checkout scm
+
+    def dockerImage=docker.build("python:latest")
+
+    dockerImage.inside{
+        sh "print('hello')"
     }
 }
-
 // pipeline {
 //     agent any
 //     stages {
