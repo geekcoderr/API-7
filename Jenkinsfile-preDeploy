@@ -10,7 +10,7 @@ pipeline {
             }
         }
         stage('deploy') {
-            agent { label 'any' }
+            agent { any }
             steps {
                 sh 'node --version'
             }
