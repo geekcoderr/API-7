@@ -1,15 +1,28 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:20.16.0-alpine3.20' }
+    }
     stages {
-        stage('Example') {
+        stage('Test') {
             steps {
-                script{
-                    // env.DORA = env.GIT_COMMIT[0..7]
-                    // env.DORA = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
-                    env.DORA = scm.configureXtream()
-                    sh("echo ${DORA}")
-                }
+                sh 'node --version'
             }
         }
     }
 }
+
+// pipeline {
+//     agent any
+//     stages {
+//         stage('Example') {
+//             steps {
+//                 script{
+//                     // env.DORA = env.GIT_COMMIT[0..7]
+//                     // env.DORA = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
+//                     env.DORA = scm.configureXtream()
+//                     sh("echo ${DORA}")
+//                 }
+//             }
+//         }
+//     }
+// }
