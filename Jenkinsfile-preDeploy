@@ -4,7 +4,7 @@ node{
     def dockerImage=docker.build("python:latest")
 
     dockerImage.inside{
-        sh "print('hello')"
+        sh('print("hello")')
     }
 }
 // pipeline {
